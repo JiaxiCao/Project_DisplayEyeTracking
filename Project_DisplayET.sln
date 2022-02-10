@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project_ArucoDetect", "Proj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project_VidCapture", "Project_VidCapture\Project_VidCapture.vcxproj", "{F9AE17CA-AFD5-4F50-BFD1-C01601C9154A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project_GazeTrackingFeature", "Project_GazeTrackingFeature\Project_GazeTrackingFeature.vcxproj", "{7D862CA3-0769-4CC1-8E07-1E92D8076857}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{F9AE17CA-AFD5-4F50-BFD1-C01601C9154A}.Release|x64.Build.0 = Release|x64
 		{F9AE17CA-AFD5-4F50-BFD1-C01601C9154A}.Release|x86.ActiveCfg = Release|Win32
 		{F9AE17CA-AFD5-4F50-BFD1-C01601C9154A}.Release|x86.Build.0 = Release|Win32
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Debug|x64.ActiveCfg = Debug|x64
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Debug|x64.Build.0 = Debug|x64
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Debug|x86.ActiveCfg = Debug|Win32
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Debug|x86.Build.0 = Debug|Win32
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Release|x64.ActiveCfg = Release|x64
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Release|x64.Build.0 = Release|x64
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Release|x86.ActiveCfg = Release|Win32
+		{7D862CA3-0769-4CC1-8E07-1E92D8076857}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

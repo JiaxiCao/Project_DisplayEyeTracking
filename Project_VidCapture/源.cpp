@@ -4,7 +4,7 @@
 #include "dshow.h"
 
 
-#define PATH "D:/"
+#define PATH "D:\\"
 #define W 720
 #define H 576
 
@@ -112,6 +112,10 @@ int main(){
 	for (int i = 0; i < list.size(); ++i) {
 		cout << "camera index " << i << ": " << list[i] << endl;
 		if (list[i] == "5M Cam") idx_scene = i;
+		if (list[i] == "Video 1 (XI006AUSB Box)") idx1 = i;
+		if (list[i] == "Video 2 (XI006AUSB Box)") idx2 = i;
+		if (list[i] == "Video 3 (XI006AUSB Box)") idx3 = i;
+		if (list[i] == "Video 4 (XI006AUSB Box)") idx4 = i;
 	}
 
 	bool camera_flag = false;
@@ -184,56 +188,26 @@ int main(){
 				camera_flag = true;
 				break;
 			}
-			if (kt == 'n' || kt == 'N') {
-				eye1.release();
-				eye2.release();
-				eye3.release();
-				eye4.release();
-				scene.release();
-				idx1 = 0; idx2 = 1; idx3 = 2; idx4 = 3; idx_scene = 6;
-				eye1.open(idx1 + cv::CAP_DSHOW);
-				eye2.open(idx2 + cv::CAP_DSHOW);
-				eye3.open(idx3 + cv::CAP_DSHOW);
-				eye4.open(idx4 + cv::CAP_DSHOW);
-				if (!eye1.isOpened() || !eye2.isOpened() || !eye3.isOpened() || !eye4.isOpened())
-				{
-					std::cout << "Can not open camera.\n";
-					return -1;
-				}
-				scene.open(idx_scene + cv::CAP_DSHOW);
-				if (!scene.isOpened())
-				{
-					std::cout << "Can not open camera.\n";
-					return -1;
-				}
-				eye1.set(cv::CAP_PROP_FRAME_WIDTH, W);
-				eye1.set(cv::CAP_PROP_FRAME_HEIGHT, H);
-				eye1.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('Y', 'U', 'Y', 'V'));
-				eye2.set(cv::CAP_PROP_FRAME_WIDTH, W);
-				eye2.set(cv::CAP_PROP_FRAME_HEIGHT, H);
-				eye2.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('Y', 'U', 'Y', 'V'));
-				eye3.set(cv::CAP_PROP_FRAME_WIDTH, W);
-				eye3.set(cv::CAP_PROP_FRAME_HEIGHT, H);
-				eye3.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('Y', 'U', 'Y', 'V'));
-				eye4.set(cv::CAP_PROP_FRAME_WIDTH, W);
-				eye4.set(cv::CAP_PROP_FRAME_HEIGHT, H);
-				eye4.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('Y', 'U', 'Y', 'V'));
-				scene.set(cv::CAP_PROP_AUTOFOCUS, 1);
-				//scene.set(CAP_PROP_FOCUS, 5);
-				scene.set(cv::CAP_PROP_FRAME_WIDTH, 1920);						/*Set frame size*/
-				scene.set(cv::CAP_PROP_FRAME_HEIGHT, 1080);
-				scene.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));	/*Default YUV2 codecs fps is 10, MJPEG codecs fps is 50+*/
-
-			}
 		}
 	}
 	cvDestroyAllWindows();
 	string uname;
 	std::cout << "文件保存路径：" << (string)PATH;
 	std::cin >> uname;
-	string path = (string)PATH + uname + "/";
+	int l = 0;
+	while (l < uname.length()) {
+		if (uname[l] == '/') {
+			uname = uname.substr(0, l) + "\\" + uname.substr(l + 1, uname.length() - l - 1);
+		}
+		++l;
+	}
+	string path = (string)PATH + uname + "\\";
 	std::cout << "路径：" << path << endl;
-	
+
+	string command;
+	command = "mkdir " + path;
+	system(command.c_str());
+
 	string out1 = path + "eye1.avi";
 	string out2 = path + "eye2.avi";
 	string out3 = path + "eye3.avi";

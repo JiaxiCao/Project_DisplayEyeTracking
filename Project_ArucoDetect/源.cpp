@@ -12,17 +12,18 @@ using namespace std;
 int main()
 {
 
-    VideoCapture v(0+cv::CAP_DSHOW);
+    /*VideoCapture v(0+cv::CAP_DSHOW);
     v.set(cv::CAP_PROP_FRAME_WIDTH, 1920);
     v.set(cv::CAP_PROP_FRAME_HEIGHT, 1080);
-    v.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));
+    v.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));*/
     cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);
 
     while (true) {
 
         cv::Mat image, imageCopy;
-        //image = imread("D:/aruco/test.png");
-        v >> image;
+        image = imread("D:/0401-cjx/ahmu/pic/4.png");
+        ofstream f("D:/0401-cjx/ahmu/pic/aruco.csv");
+        //v >> image;
         image.copyTo(imageCopy);
         std::vector<int> ids;
         std::vector<std::vector<cv::Point2f>> corners;
@@ -34,11 +35,20 @@ int main()
             for (int i = 0; i < corners.size(); ++i)
                 cout << corners[i] << ',';
             cout << endl;
+            for (int i = 1; i <= 10; ++i) {
+                int j = 0;
+                for (; j < ids.size(); ++j) {
+                    if (ids[j] == i) {
+                        f << corners[j][0].x << ',' << corners[j][0].y << ',';
+                    }
+                }
+            }
+            f << endl;
         }
         cout << clock() - tim1 << endl;
         pyrDown(imageCopy, imageCopy);
         cv::imshow("out", imageCopy);
-        cv::waitKey(30);
+        cv::waitKey();
 
     }
 
